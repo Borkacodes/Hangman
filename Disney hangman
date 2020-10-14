@@ -1,0 +1,208 @@
+import random
+
+def get_word():
+    words = ['pooh',
+            'nemo',
+            'pluto',
+            'belle',
+            'rex',
+            'panda',
+            'monkey',
+            'daisy',
+            'pongo',
+            'rudolph',
+            'piglet',
+            'dog',
+            'disney',
+            'music',
+            'piano',
+            'ballon',
+            'elsa',
+            'ariel',
+            'jafar',
+            'tiana',
+            'gaston',
+            'maleficent',
+            'buzz',
+            'pete',
+            'ursula',
+            'drizella',
+            'simba',
+            'eeyore',
+            'stepmother',
+            'yzma',
+            'baloo',
+            'olaf',
+            'stitch',
+            'beast',
+            'mushu',
+            'hatter',
+            'nala',
+            'merida',
+            'huey',
+            'dewey',
+            'louie'
+            'tigger',
+            'smee',
+            'cinderella',
+            'mickey',
+            'minnie',
+            'woody',
+            'aladdin',
+            'hercules',
+            'tarzan',
+            'ratatouille',
+            'wall-e',
+            'bolt',
+            'anna',
+            'hans',
+            'ralph',
+            'dory',
+            'moana',
+            'joy',
+            'sadness'
+            'fear',
+            'bashful',
+            'doc',
+            'dopey'
+            'grumpy',
+            'happy',
+            'sleepy',
+            'sneezy',
+            'pinocchio',
+            'geppetto',
+            'dumbo',
+            'alice',
+            'peter',
+            'wendy',
+            'darling',
+            'lady',
+            'aurora',
+            'fauna',
+            'flora',
+            'merryweather',
+            'merlin',
+            'jane',
+            'kanga',
+            'roo',
+            'mowgil',
+            'sebastian',
+            'chip',
+            'maurice',
+            'timon',
+            'pumbaa',
+            'scar',
+            'pocahontas',
+            'jessie',
+            'slinky',
+            'bulleye',
+            'buttercup',
+            'trixie',
+            'andy',
+            'bookworm',
+            'quasimodo',
+            'zazu',
+            'mulan',
+            'mike',
+            'sulley',
+            'boo',
+            'randall',
+            'nani',
+            'bambi',
+            'goofy',
+            'jerry',
+            'marlin',
+            'gill',
+            'crush',
+            'bob',
+            'syndrome',
+            'elastigirl',
+            'dash',
+            'violet',
+            'jack',
+            'edna',
+            'frozone',
+            'mater',
+            'eve',
+            'russell',
+            'dug',
+            'carl',
+            'rapunzel',
+            'flynn',
+            'sven',
+            'kristoff',
+            'baymax',
+            'hiro',
+            'tadashi',
+            'fred',
+            'anger',
+            'disgust',
+            'riley',
+            'nick',
+            'judy',
+            'flash',
+            'gazelle',
+            'bailey',
+            'destiny',
+            'hank',
+            'hook',
+            'jasmine',
+            'Cheshire',
+            'Thumper',
+            'Pascal']
+    return random.choice(words).upper()
+
+def check(word,guesses,guess):
+    guess = guess.upper()
+    status = ''
+    i = 0
+    matches = 0
+    for letter in word:
+        if letter in guesses:
+            status += letter
+        else:
+            status += '*'
+            
+        if letter == guess:
+            matches += 1
+    
+    if matches > 1:
+        print('Yes! the word contains', matches,'"' + guess + '"' + 's')
+    elif matches == 1:
+        print('Yes! the words the letter "' + guess + '"')
+    else:
+        print('Sorry. the word does not contain the letter "' + guess + '"')
+        
+    return status
+
+def main():
+    word = get_word()
+    #print(word)
+    guesses = []
+    guessed = False
+    print('the word contains',len(word),'letters.')
+    while not guessed:
+        text = 'please enter one letter or a {}-letter word. '.format(len(word))
+        guess = input(text)
+        guess = guess.upper()
+        if guess in guesses:
+            print('You already guessed"' + guess + '"')
+        elif len(guess) == len(word):
+            guesses.append(guess)
+            if guess == word:
+                guessed = True
+            else:
+                print('sorry that is incorrect.')
+        elif len(guess) == 1:
+            guesses.append(guess)
+            result = check(word,guesses,guess)
+            if result == word:
+                guessed = True
+                
+            else:
+                print(result)
+        else:
+            print('invalid entry.')
+            
+    print('yes, the word is', word + '! You got it in', len(guesses), 'tries.')
+main()
